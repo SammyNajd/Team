@@ -10,15 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_010318) do
+ActiveRecord::Schema.define(version: 2020_08_19_224153) do
 
   create_table "tasks", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
     t.integer "priority"
-    t.string "status"
     t.string "subject"
     t.text "description"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "role"
+    t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

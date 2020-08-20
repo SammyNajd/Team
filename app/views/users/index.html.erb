@@ -1,0 +1,49 @@
+<% if notice %>
+  <aside id="notice"><%= notice %></aside>
+<% end %>
+
+<h1>Users</h1>
+
+<table class="users">
+  <tfoot>
+    <tr>
+      <td colspan="5">
+        <%= link_to "New User", new_user_path %>
+      </td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Role</th>
+      <th>Active?</th>
+      <th>Actions</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+        <td>
+          <%= user.first_name %>
+        </td>
+        <td>
+          <%= user.last_name %>
+        </td>
+        <td>
+          <%= user.role %>
+        </td>
+        <td>
+          <%= user.active %>
+        </td>
+        <td class="actions">
+          <ul>
+            <li><%= link_to "Show", user %></li>
+            <li><%= link_to "Edit", edit_user_path(user) %></li>
+            <li><%= link_to "Destroy", user, method: :delete, 
+                    data: {confirm: 'Are you sure?'} %></li>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    

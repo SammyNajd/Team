@@ -16,11 +16,6 @@
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
-
-<p>
   <strong>Subject:</strong>
   <%= @task.subject %>
 </p>
@@ -28,6 +23,11 @@
 <p>
   <strong>Description:</strong>
   <%= @task.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task.status %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
