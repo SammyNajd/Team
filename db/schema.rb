@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 2020_08_19_224153) do
     t.string "subject"
     t.text "description"
     t.string "status"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

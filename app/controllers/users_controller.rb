@@ -61,6 +61,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def self.get_active_users
+    @active_users = []
+    User.where("active = true").find_each do |user|
+      @active_users << ["#{user.last_name}, #{user.first_name}", user.id]
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -69,6 +76,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :role, :active)
+      params.require(:user).permit(:id, :first_name, :last_name, :role, :active)
     end
 end

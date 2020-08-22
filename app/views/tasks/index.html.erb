@@ -7,13 +7,14 @@
 <table class="tasks">
   <tfoot>
     <tr>
-      <td colspan="7">
+      <td colspan="8">
         <%= link_to "New Task", new_task_path %>
       </td>
     </tr>
   </tfoot>
   <tbody>
     <tr>
+      <th>Assigned To</th>
       <th>Start Date</th>
       <th>Subject</th>
       <th>Description</th>
@@ -24,6 +25,8 @@
     </tr>
     <% @tasks.each do |task| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+        <td>
+          <%= "#{User.find(task.user_id).first_name}, #{User.find(task.user_id).last_name}" %>
         <td>
           <%= task.start_date %>
         </td>
