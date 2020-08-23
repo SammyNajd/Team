@@ -2,6 +2,9 @@
   <aside id="notice"><%= notice %></aside>
 <% end %>
 
+<% if User.all.blank? %>
+  <%= controller.redirect_to new_user_url, notice: "No users detected, must create users first" %>
+<% else %>
 <h1>Tasks</h1>
 
 <table class="tasks">
@@ -9,6 +12,7 @@
     <tr>
       <td colspan="8">
         <%= link_to "New Task", new_task_path %>
+        <%= link_to "Create a User", new_user_path %>
       </td>
     </tr>
   </tfoot>
@@ -25,8 +29,9 @@
     </tr>
     <% @tasks.each do |task| %>
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
         <td>
-          <%= "#{User.find(task.user_id).first_name}, #{User.find(task.user_id).last_name}" %>
+          <%= "#{User.find(task.user_id).last_name}, #{User.find(task.user_id).first_name}" %>
         <td>
           <%= task.start_date %>
         </td>
@@ -60,3 +65,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>

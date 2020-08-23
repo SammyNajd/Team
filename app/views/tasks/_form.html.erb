@@ -1,3 +1,7 @@
+<% if User.all.blank? %>
+  <%= controller.redirect_to new_user_url, notice: "No users detected, must create users first" %>
+<% else %>
+
 <%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
@@ -10,6 +14,7 @@
       </ul>
     </div>
   <% end %>
+
 
   <div class="field">
     <%= form.label :user %>
@@ -34,14 +39,14 @@
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.number_field :priority %>
+    <%= form.select :priority, Task.priority_levels.keys, prompt: "Select a priority level" %>
   </div>
 
 
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.select :status, Task.status_levels.keys, prompt: "Select a status level" %>
   </div>
 
 
@@ -53,4 +58,6 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+<% end %>
+
 <% end %>
