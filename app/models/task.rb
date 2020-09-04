@@ -10,7 +10,6 @@ class Task < ApplicationRecord
         "Severe" => 5
     }
 
-    enum inv_priority_levels = priority_levels.invert
 
     enum status_levels: {
         "Planned" => "Planned",
