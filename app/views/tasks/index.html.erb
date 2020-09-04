@@ -39,7 +39,7 @@
           <%= task.status %>
         </td>
         <td>
-          <%= task.priority %>
+          <%= task.priority.map {Task.inv_priority_levels} %>
         </td>
 
         <td>
