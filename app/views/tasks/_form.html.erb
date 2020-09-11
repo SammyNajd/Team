@@ -18,7 +18,8 @@
 
   <div class="field">
     <%= form.label :user %>
-    <%= form.select :user_id, User.where("active=true").map{ |user| ["#{user.last_name}, #{user.first_name}", user.id]}, prompt: 'Select an active user' %>
+    <%= form.select :user_id, active_users , prompt: 'Select an active user' %>
+
   </div>
 
 

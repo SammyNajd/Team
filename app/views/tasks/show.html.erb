@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Assigned to:</strong>
+  <%= @task.user.first_name %>
+</p>
+
+<p>
   <strong>Start date:</strong>
   <%= @task.start_date %>
 </p>

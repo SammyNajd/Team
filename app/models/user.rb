@@ -3,5 +3,11 @@ class User < ApplicationRecord
 
     has_many :tasks
 
+    scope :active, -> {where(active: true)}
+
+
+    def get_full_name
+        "#{last_name}, #{first_name}"
+    end
 
 end

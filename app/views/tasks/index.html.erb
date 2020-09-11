@@ -23,7 +23,7 @@
       <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
 
         <td>
-          <%= "#{User.find(task.user_id).last_name}, #{User.find(task.user_id).first_name}" %>
+          <%= task.user.get_full_name %>
         <td>
           <%= task.start_date %>
         </td>

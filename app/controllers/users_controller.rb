@@ -61,18 +61,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def self.get_active_users
-    @active_users = []
-    User.where("active = true").find_each do |user|
-      @active_users << ["#{user.last_name}, #{user.first_name}", user.id]
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
+
 
     # Only allow a list of trusted parameters through.
     def user_params

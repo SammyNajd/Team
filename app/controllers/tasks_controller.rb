@@ -1,10 +1,14 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :get_active_users, only: [:new, :create, :edit, :update]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.includes(:user)
+
+    @tasks = @tasks.where("description LIKE '%meeting%'")
+
   end
 
   # GET /tasks/1
@@ -25,9 +29,6 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
-    puts "***** PRIORITY *******"
-    puts task_params[:priority]
 
     respond_to do |format|
       if @task.save
@@ -69,6 +70,14 @@ class TasksController < ApplicationController
     def set_task
       @task = Task.find(params[:id])
     end
+
+    def get_active_users
+      @active_users = []
+      User.active.find_each do |user|
+        @active_users << ["#{user.last_name}, #{user.first_name}", user.id]
+      end
+    end
+
 
     # Only allow a list of trusted parameters through.
     def task_params
