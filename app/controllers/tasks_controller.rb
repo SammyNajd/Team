@@ -7,8 +7,10 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.includes(:user)
 
-    @tasks = @tasks.where("description LIKE '%meeting%'")
-
+    # @tasks = @tasks.where("description LIKE '%meeting%'")
+    if params[:search_query] and params[:search_field]
+      @tasks = Task.search(params[:search_query], params[:search_field]).order("start_date DESC")
+    end
   end
 
   # GET /tasks/1

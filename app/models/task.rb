@@ -17,4 +17,23 @@ class Task < ApplicationRecord
         "Completed" => "Completed"
     }
 
+    enum search_types: {
+        "Assigned To" => "user",
+        "Subject" => "subject",
+        "Description" => "description",
+        "Status" => "status",
+        "Priority" => "priority"
+    }
+
+
+
+
+
+    def self.search(search, search_type)
+        if search and search_type
+            where("#{search_type} LIKE '%#{search}'")
+        end
+    end
+
+
 end
