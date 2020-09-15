@@ -26,11 +26,12 @@ class Task < ApplicationRecord
     }
 
 
+    
 
 
 
     def self.search(search, search_type)
-        if search and search_type
+        if search && search_type
             where("#{search_type} LIKE '%#{search}'")
         end
     end

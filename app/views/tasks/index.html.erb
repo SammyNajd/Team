@@ -7,8 +7,8 @@
 <% else %>
 <h1>Tasks</h1>
 
-<%= form_with url: tasks_path, method: "get" do |f| %>
-  <%= f.select :search_field, Task.search_types, prompt: 'Select a search field' %>
+<%= form_tag tasks_path, method: "get" do %>
+  <%= select_tag :search_field, options_for_select(Task.search_types), prompt: 'Select a search field' %>
   <%= text_field_tag :search_query, params[:search_query] %>
   <%= submit_tag "Search" %>
 <% end %>
