@@ -32,9 +32,16 @@ class Task < ApplicationRecord
 
     def self.search(search, search_type)
         if search && search_type
-            where("#{search_type} LIKE '%#{search}'")
+            where("#{search_type} LIKE '%#{search}%'").order(start_date: :desc)
         end
     end
+
+    def self.sort_by_start_date()
+      #  if search && search_type
+       #     where("#{search_type} LIKE '%#{search}'").order(start_date: :desc)
+       # end
+    end
+        
 
 
 end

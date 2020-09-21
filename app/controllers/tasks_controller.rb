@@ -1,15 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :get_active_users, only: [:new, :create, :edit, :update]
-
+  helper_method :sort_column, :sort_direction
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.includes(:user)
+    @tasks = Task.includes(:user).order(sort_column + " " + sort_direction)
+    puts "Search query vals"
+    puts params[:search_query]
 
-    puts "Here is the #{params[:search_field]}"
     if (params[:search_query] && params[:search_field])
-      @tasks =  Task.search(params[:search_query], params[:search_field])
+      @tasks =  Task.search(params[:search_query], params[:search_field]).order(sort_column + " " + sort_direction)
     end
   end
 
@@ -80,9 +81,18 @@ class TasksController < ApplicationController
       end
     end
 
+    def sort_direction
+      params[:direction] || "desc"
+    end
+
+    def sort_column
+      params[:sort_column] || "start_date"
+    end
+
 
     # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:start_date, :end_date, :priority, :subject, :description, :status, :user_id)
     end
+
 end
